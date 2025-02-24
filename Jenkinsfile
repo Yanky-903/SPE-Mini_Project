@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/your-repo.git'
+                git 'https://github.com/Yanky-903/SPE-Mini_Project'
             }
         }
         stage('Build') {
