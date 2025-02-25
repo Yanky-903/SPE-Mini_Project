@@ -38,14 +38,9 @@ pipeline {
     }
 
 
-   stage('Run Ansible Playbook') {
+        stage('Deploy with Ansible') {
             steps {
-                script {
-                    ansiblePlaybook(
-                        playbook: 'deploy-docker.yml',
-                        inventory: 'inventory'
-                     )
-                }
+                sh 'ansible-playbook -i inventory deploy-docker.yml'
             }
         }
     }
