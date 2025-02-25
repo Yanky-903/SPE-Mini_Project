@@ -34,7 +34,8 @@ pipeline {
                     sh 'docker push $DOCKER_IMAGE'
                 }
             }
-        }
+       }
+
         stage('Deploy with Ansible') {
             steps {
                 sh 'ansible-playbook -i inventory deploy_docker.yml'
