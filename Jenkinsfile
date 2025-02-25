@@ -4,7 +4,7 @@ pipeline {
         maven 'Maven3'
     }
     environment {
-        DOCKER_IMAGE = 'yashraj-singh-chauhan/scientific-calculator:latest'  // Replace with your Docker Hub repo
+        DOCKER_IMAGE = 'yashraj-singh-chauhan/scientific-calculator:latest'  // Your Docker Hub repo
     }
     stages {
         stage('Checkout Code') {
@@ -29,12 +29,11 @@ pipeline {
         }
         stage('Push to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'DockerHubCred', usernameVariable: 'DOCKER_USER',passwordVariable: 'DOCKER_PASS')]) {
-                                        sh 'docker tag calculator yanky1903/calculator:latest'
-                                        sh 'docker push yanky1903/calculator'
+                withCredentials([usernamePassword(credentialsId: 'DockerHubCred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                    sh 'docker push $DOCKER_IMAGE'
                 }
             }
         }
     }
 }
-
