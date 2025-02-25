@@ -40,7 +40,7 @@ pipeline {
 
         stage('Deploy with Ansible') {
             steps {
-                sh 'ansible-playbook -i inventory deploy-docker.yml'
+                sh 'ansible-playbook -i inventory deploy-docker.yml --become'
             }
         }
     }
