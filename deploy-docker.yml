@@ -1,0 +1,19 @@
+- name: Deploy Scientific Calculator using Docker
+  hosts: managed_nodes
+  become: true
+  tasks:
+    - name: Ensure Docker is installed
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Pull Docker image
+      command: docker pull yashraj-singh-chauhan/scientific-calculator:latest
+
+    - name: Remove existing container
+      command: docker rm -f scientific-calculator
+      ignore_errors: yes
+
+    - name: Run Docker container
+      command: docker run -d --name scientific-calculator -p 8080:8080 yashraj-singh-chauhan/scientific-calculator:latest
