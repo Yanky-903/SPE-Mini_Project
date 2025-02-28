@@ -27,9 +27,9 @@
       command: docker pull yanky1903/scientific-calculator:latest
 
     - name: Stop and remove old container if exists
-      command: |
-        docker stop scientific-calculator || true
-        docker rm scientific-calculator || true
+      docker_container:
+        name: scientific-calculator
+        state: absent
 
     - name: Run the Docker container
       command: docker run -d --name scientific-calculator -p 8080:8080 yanky1903/scientific-calculator:latest
