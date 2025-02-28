@@ -12,10 +12,6 @@
         state: absent
       ignore_errors: yes
 
-    - name: Install Docker
-      apt:
-        name: docker.io
-        state: present
 
     - name: Start Docker service
       service:
