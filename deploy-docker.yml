@@ -1,6 +1,6 @@
 ---
 - name: Deploy Scientific Calculator using Docker
-  hosts: webservers
+  hosts: localhost
   become: yes
   tasks:
     - name: Update package lists
