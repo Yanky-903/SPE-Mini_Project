@@ -32,4 +32,4 @@
         docker rm scientific-calculator || true
 
     - name: Run the Docker container
-      command: docker run -d --name scientific-calculator -p 8080:8080 yashraj-singh-chauhan/scientific-calculator:latest
+      command: docker run -d --name scientific-calculator -p 8080:8080 yanky1903/scientific-calculator:latest
