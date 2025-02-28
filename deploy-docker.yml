@@ -1,31 +1,29 @@
-- name: Deploy Scientific Calculator using Docker
+- name: Deploy Calculator Container Using Docker
   hosts: localhost
-  become: yes
   tasks:
-    - name: Update package lists
-      apt:
-        update_cache: yes
+    - name: Pull the latest Docker image from Docker Hub
+      shell: docker pull yanky1903/scientific-calculator
+      register: pull_result
 
-    - name: Remove conflicting packages (if needed)
-      apt:
-        name: containerd.io
-        state: absent
-      ignore_errors: yes
-
+    - name: Display Docker Pull Result
+      debug:
+        var: pull_result
 
     - name: Start Docker service
       service:
         name: docker
         state: started
-        enabled: yes
 
-    - name: Pull the latest Docker image
-      command: docker pull yanky1903/scientific-calculator:latest
-
-    - name: Stop and remove old container if exists
-      docker_container:
-        name: scientific-calculator
-        state: absent
+    - name: Stop and remove old container if it exists
+      shell: |
+        docker stop scientific-calculator || true
+        docker rm scientific-calculator || true
+      ignore_errors: yes
 
     - name: Run the Docker container
-      command: docker run -d --name scientific-calculator -p 8080:8080 yanky1903/scientific-calculator:latest
+      command: docker run -it -d --name scientific-calculator -p 5000:8080 yanky1903/scientific-calculator:latest
+      register: run_result
+
+    - name: Display Container Run Result
+      debug:
+        var: run_result.stdout
