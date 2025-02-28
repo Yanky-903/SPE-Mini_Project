@@ -24,7 +24,7 @@
         enabled: yes
 
     - name: Pull the latest Docker image
-      command: docker pull yashraj-singh-chauhan/scientific-calculator:latest
+      command: docker pull yanky1903/scientific-calculator:latest
 
     - name: Stop and remove old container if exists
       command: |
