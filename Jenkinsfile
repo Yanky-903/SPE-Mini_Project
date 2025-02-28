@@ -43,5 +43,6 @@ pipeline {
                 sh 'ansible-playbook -i inventory deploy-docker.yml --become'
             }
         }
+
     }
 }

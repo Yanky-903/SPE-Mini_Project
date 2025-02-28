@@ -1,4 +1,3 @@
----
 - name: Deploy Scientific Calculator using Docker
   hosts: localhost
   become: yes
@@ -26,6 +25,11 @@
 
     - name: Pull the latest Docker image
       command: docker pull yashraj-singh-chauhan/scientific-calculator:latest
+
+    - name: Stop and remove old container if exists
+      command: |
+        docker stop scientific-calculator || true
+        docker rm scientific-calculator || true
 
     - name: Run the Docker container
       command: docker run -d --name scientific-calculator -p 8080:8080 yashraj-singh-chauhan/scientific-calculator:latest
